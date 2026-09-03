@@ -262,22 +262,11 @@ export default function PantallaVivo() {
                   </div>
 
                   <div className="flex-1">
-                    <h2 className="line-clamp-2 max-w-2xl text-lg font-black leading-[1.08] tracking-[-0.03em] text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.6)] md:text-2xl xl:text-3xl">
-                      {currentSong.song}
-                    </h2>
-
                     {currentSong.message && (
                       <p className="mt-3 max-w-2xl rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-base font-semibold italic leading-relaxed text-white shadow-[0_0_24px_rgba(255,255,255,0.12)] backdrop-blur-sm md:text-2xl md:leading-relaxed">
                         “{currentSong.message}”
                       </p>
                     )}
-
-                    <div className="mt-4 flex items-center gap-4">
-                      <div className="flex h-2.5 w-40 max-w-full overflow-hidden rounded-full bg-white/10 md:w-48">
-                        <div className="h-full w-2/3 rounded-full bg-[#1ed760] shadow-[0_0_18px_rgba(30,215,96,0.9)]" />
-                      </div>
-                      <span className="text-[9px] font-bold uppercase tracking-[0.28em] text-white/80">live</span>
-                    </div>
 
                     <div className="mt-5 flex items-end gap-2">
                       {Array.from({ length: 24 }).map((_, i) => (
@@ -292,6 +281,10 @@ export default function PantallaVivo() {
                         />
                       ))}
                     </div>
+
+                    <h2 className="mt-4 line-clamp-2 max-w-2xl text-lg font-black leading-[1.08] tracking-[-0.03em] text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.6)] md:text-2xl xl:text-3xl">
+                      {currentSong.song}
+                    </h2>
                   </div>
                 </div>
               </div>
