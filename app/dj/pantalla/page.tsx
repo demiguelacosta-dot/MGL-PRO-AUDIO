@@ -290,14 +290,14 @@ export default function PantallaVivo() {
               </div>
             </section>
 
-            <aside className="w-full shrink-0 rounded-[30px] border border-white/10 bg-[#0b1220]/85 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-sm md:w-[360px] md:max-w-[360px]">
+            <aside className="flex h-[min(70vh,560px)] w-full shrink-0 flex-col overflow-hidden rounded-[30px] border border-white/10 bg-[#0b1220]/85 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-sm md:h-auto md:max-h-[calc(100vh-180px)] md:w-[360px] md:max-w-[360px]">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-[11px] font-bold uppercase tracking-[0.32em] text-white/70">próximos</h3>
                 <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-xs font-bold text-white/80">{pendingRequests.length}</span>
               </div>
 
-              <div className="space-y-3">
-                {pendingRequests.slice(0, 6).map((req, idx) => (
+              <div className="min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
+                {pendingRequests.map((req, idx) => (
                   <div
                     key={req.id}
                     className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3"
