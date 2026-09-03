@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
 function buildVideoEmbedUrl(videoId: string) {
-  return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&modestbranding=1&showinfo=0&cc_load_policy=0&cc_lang_pref=es&hl=es&iv_load_policy=3`;
+  return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&modestbranding=1&showinfo=0&cc_load_policy=0&cc_lang_pref=es&hl=es&iv_load_policy=3&enablejsapi=1`;
 }
 
 function getSongSignature(song: any) {
@@ -23,6 +23,20 @@ export default function PantallaVivo() {
   const currentVideoUrlRef = useRef('');
   const currentSongSignatureRef = useRef('');
   const currentScreenKey = currentSong ? `${currentSong.id ?? 'song'}-${currentSong.song ?? ''}-${currentSong.message ?? ''}` : 'idle';
+  const videoFrameRef = useRef<HTMLIFrameElement>(null);
+  const [audioEnabled, setAudioEnabled] = useState(false);
+
+  function enableAudio() {
+    videoFrameRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
+      'https://www.youtube-nocookie.com'
+    );
+    videoFrameRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+      'https://www.youtube-nocookie.com'
+    );
+    setAudioEnabled(true);
+  }
 
   async function fetchRequests() {
     const { data } = await supabase
@@ -87,6 +101,7 @@ export default function PantallaVivo() {
         }
 
         currentVideoUrlRef.current = nextVideoUrl;
+        setAudioEnabled(false);
         setPreviewFailed(false);
         setPreviewImageUrl(nextImage);
         setPreviewVideoUrl(nextVideoUrl);
@@ -120,6 +135,7 @@ export default function PantallaVivo() {
         }
 
         currentVideoUrlRef.current = nextVideoUrl;
+        setAudioEnabled(false);
         setPreviewImageUrl(nextImage);
         setPreviewVideoUrl(nextVideoUrl);
       } catch {
@@ -219,6 +235,7 @@ export default function PantallaVivo() {
                   {previewVideoUrl && (
                     <div className="absolute inset-0 opacity-90 scale-105">
                       <iframe
+                        ref={videoFrameRef}
                         src={previewVideoUrl}
                         title="Preview de YouTube"
                         className="pointer-events-none h-full w-full"
@@ -230,6 +247,16 @@ export default function PantallaVivo() {
                         style={{ border: 0, filter: 'saturate(1.15) contrast(1.15) brightness(0.85)' }}
                       />
                     </div>
+                  )}
+
+                  {previewVideoUrl && !audioEnabled && (
+                    <button
+                      type="button"
+                      onClick={enableAudio}
+                      className="absolute bottom-6 right-6 z-20 rounded-full border border-white/20 bg-black/65 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white shadow-lg backdrop-blur-sm transition hover:bg-black/85"
+                    >
+                      Activar audio
+                    </button>
                   )}
                 </>
               )}
