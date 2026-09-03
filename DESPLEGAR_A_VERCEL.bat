@@ -21,6 +21,11 @@ set /p VERCEL_TOKEN="Pega tu token de Vercel (no se guardara): "
 if not defined VERCEL_TOKEN goto :no_token
 
 echo.
+echo Verificando la cuenta de Vercel...
+call npx vercel whoami --token "!VERCEL_TOKEN!"
+if errorlevel 1 goto :invalid_token
+
+echo.
 echo Comprobando el proyecto...
 call npm run build
 if errorlevel 1 goto :build_error
@@ -47,6 +52,12 @@ exit /b 1
 
 :no_token
 echo ERROR: debes introducir el token de Vercel.
+pause
+exit /b 1
+
+:invalid_token
+echo ERROR: Vercel no reconoce este token o su cuenta.
+echo Crea un token nuevo en Vercel Settings - Tokens.
 pause
 exit /b 1
 
