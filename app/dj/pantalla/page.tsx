@@ -23,18 +23,14 @@ export default function PantallaVivo() {
   const currentVideoUrlRef = useRef('');
   const currentSongSignatureRef = useRef('');
   const currentScreenKey = currentSong ? `${currentSong.id ?? 'song'}-${currentSong.song ?? ''}-${currentSong.message ?? ''}` : 'idle';
-  const videoFrameRef = useRef<HTMLIFrameElement>(null);
   const [audioEnabled, setAudioEnabled] = useState(false);
 
   function enableAudio() {
-    videoFrameRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
-      'https://www.youtube-nocookie.com'
-    );
-    videoFrameRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
-      'https://www.youtube-nocookie.com'
-    );
+    const audibleVideoUrl = currentVideoUrlRef.current.replace('mute=1', 'mute=0');
+    if (audibleVideoUrl === currentVideoUrlRef.current) return;
+
+    currentVideoUrlRef.current = audibleVideoUrl;
+    setPreviewVideoUrl(audibleVideoUrl);
     setAudioEnabled(true);
   }
 
@@ -235,7 +231,6 @@ export default function PantallaVivo() {
                   {previewVideoUrl && (
                     <div className="absolute inset-0 opacity-90 scale-105">
                       <iframe
-                        ref={videoFrameRef}
                         src={previewVideoUrl}
                         title="Preview de YouTube"
                         className="pointer-events-none h-full w-full"
