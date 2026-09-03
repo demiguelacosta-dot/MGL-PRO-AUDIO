@@ -262,7 +262,7 @@ export default function PantallaVivo() {
                   </div>
 
                   <div className="flex-1">
-                    <h2 className="max-w-3xl text-xl font-black leading-[1.05] tracking-[-0.05em] text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.6)] md:text-3xl xl:text-4xl">
+                    <h2 className="line-clamp-2 max-w-2xl text-lg font-black leading-[1.08] tracking-[-0.03em] text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.6)] md:text-2xl xl:text-3xl">
                       {currentSong.song}
                     </h2>
 
