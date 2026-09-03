@@ -4,6 +4,10 @@ function stripAccents(value: string) {
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
+function isVevoResult(title: string) {
+  return /\bvevo\b/i.test(title);
+}
+
 function makeCoverArt(label: string) {
   const safeText = stripAccents(label).replace(/&/g, 'and').replace(/[^a-zA-Z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 18) || 'MUSIC';
   const palette = ['#22c55e', '#0ea5e9', '#8b5cf6', '#f59e0b', '#ef4444', '#14b8a6'];
@@ -48,9 +52,9 @@ function normalizeYoutubeResults(raw: unknown): Array<{ text: string; cover: str
     const id = item?.id as Record<string, unknown> | undefined;
     const title = typeof snippet?.title === 'string' ? snippet.title.trim() : '';
     const videoId = typeof id?.videoId === 'string' ? id.videoId.trim() : '';
-    if (!title || !videoId) continue;
+    if (!title || !videoId || isVevoResult(title)) continue;
 
-    const thumbnails = (snippet?.thumbnails as Record<string, any> | undefined) ?? {};
+    const thumbnails = (snippet?.thumbnails as Record<string, Record<string, unknown>> | undefined) ?? {};
     const cover =
       typeof thumbnails?.high?.url === 'string'
         ? thumbnails.high.url
@@ -81,7 +85,7 @@ function normalizeYoutubeHtmlSuggestions(html: string): Array<{ text: string; co
     const textMatches = [...runs.matchAll(/"text":"((?:\\.|[^"\\])*)"/g)];
     const text = textMatches.map((entry) => decodeRunText(entry[1])).join('').trim();
 
-    if (!text || seen.has(videoId)) continue;
+    if (!text || isVevoResult(text) || seen.has(videoId)) continue;
     seen.add(videoId);
     results.push({
       text,
@@ -110,7 +114,7 @@ export async function GET(request: NextRequest) {
     try {
       const url = new URL('https://www.googleapis.com/youtube/v3/search');
       url.searchParams.set('part', 'snippet');
-      url.searchParams.set('q', q);
+      url.searchParams.set('q', `${q} -VEVO`);
       url.searchParams.set('type', 'video');
       url.searchParams.set('maxResults', '8');
       url.searchParams.set('key', youtubeKey);
