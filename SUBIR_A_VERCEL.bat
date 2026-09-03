@@ -49,8 +49,13 @@ if not "%REPO_URL%"=="" (
   git config user.name >nul 2>&1 || goto :missing_git_identity
   git config user.email >nul 2>&1 || goto :missing_git_identity
   git add .
-  git commit -m "Deploy MGL Pro Audio"
-  if errorlevel 1 goto :commit_failed
+  git diff --cached --quiet
+  if errorlevel 1 (
+    git commit -m "Deploy MGL Pro Audio"
+    if errorlevel 1 goto :commit_failed
+  ) else (
+    echo No hay cambios nuevos para crear commit.
+  )
   git fetch origin
   git merge origin/main --allow-unrelated-histories -m "Integrate GitHub history"
   if errorlevel 1 goto :merge_failed
