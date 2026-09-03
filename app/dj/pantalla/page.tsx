@@ -135,6 +135,10 @@ export default function PantallaVivo() {
   useEffect(() => {
     fetchRequests();
 
+    const pollingId = window.setInterval(() => {
+      fetchRequests();
+    }, 1500);
+
     const refreshLive = () => {
       fetchRequests();
     };
@@ -161,6 +165,7 @@ export default function PantallaVivo() {
       window.addEventListener('storage', onStorage);
 
       return () => {
+        window.clearInterval(pollingId);
         bc?.close();
         window.removeEventListener('storage', onStorage);
         supabase.removeChannel(channel);
@@ -168,6 +173,7 @@ export default function PantallaVivo() {
     }
 
     return () => {
+      window.clearInterval(pollingId);
       supabase.removeChannel(channel);
     };
   }, []);
