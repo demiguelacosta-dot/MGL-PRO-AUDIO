@@ -23,16 +23,6 @@ export default function PantallaVivo() {
   const currentVideoUrlRef = useRef('');
   const currentSongSignatureRef = useRef('');
   const currentScreenKey = currentSong ? `${currentSong.id ?? 'song'}-${currentSong.song ?? ''}-${currentSong.message ?? ''}` : 'idle';
-  const [audioEnabled, setAudioEnabled] = useState(false);
-
-  function enableAudio() {
-    const audibleVideoUrl = currentVideoUrlRef.current.replace('mute=1', 'mute=0');
-    if (audibleVideoUrl === currentVideoUrlRef.current) return;
-
-    currentVideoUrlRef.current = audibleVideoUrl;
-    setPreviewVideoUrl(audibleVideoUrl);
-    setAudioEnabled(true);
-  }
 
   async function fetchRequests() {
     const { data } = await supabase
@@ -97,7 +87,6 @@ export default function PantallaVivo() {
         }
 
         currentVideoUrlRef.current = nextVideoUrl;
-        setAudioEnabled(false);
         setPreviewFailed(false);
         setPreviewImageUrl(nextImage);
         setPreviewVideoUrl(nextVideoUrl);
@@ -131,7 +120,6 @@ export default function PantallaVivo() {
         }
 
         currentVideoUrlRef.current = nextVideoUrl;
-        setAudioEnabled(false);
         setPreviewImageUrl(nextImage);
         setPreviewVideoUrl(nextVideoUrl);
       } catch {
@@ -242,16 +230,6 @@ export default function PantallaVivo() {
                         style={{ border: 0, filter: 'saturate(1.15) contrast(1.15) brightness(0.85)' }}
                       />
                     </div>
-                  )}
-
-                  {previewVideoUrl && !audioEnabled && (
-                    <button
-                      type="button"
-                      onClick={enableAudio}
-                      className="absolute bottom-6 right-6 z-20 rounded-full border border-white/20 bg-black/65 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white shadow-lg backdrop-blur-sm transition hover:bg-black/85"
-                    >
-                      Activar audio
-                    </button>
                   )}
                 </>
               )}
