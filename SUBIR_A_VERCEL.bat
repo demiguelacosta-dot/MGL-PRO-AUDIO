@@ -67,8 +67,15 @@ if not "%REPO_URL%"=="" (
 
 echo.
 echo [5/5] Abriendo Vercel
-start "" "https://vercel.com/new"
-echo Proyecto preparado. Agrega las variables de entorno en Vercel.
+set /p VERCEL_TOKEN="Token de Vercel (deja vacio para abrir la web): "
+if defined VERCEL_TOKEN (
+  echo Desplegando con Vercel CLI...
+  call npx vercel --prod --token "!VERCEL_TOKEN!"
+  if errorlevel 1 goto :vercel_failed
+) else (
+  start "" "https://vercel.com/new"
+  echo Proyecto preparado. Agrega las variables de entorno en Vercel.
+)
 pause
 exit /b 0
 
@@ -102,5 +109,10 @@ pause
 exit /b 1
 :push_failed
 echo ERROR: no se pudo hacer push. Revisa la URL, permisos o login de GitHub.
+pause
+exit /b 1
+:vercel_failed
+echo ERROR: Vercel no pudo desplegar el proyecto.
+echo Comprueba que el token sea correcto y que tengas acceso a la cuenta.
 pause
 exit /b 1
