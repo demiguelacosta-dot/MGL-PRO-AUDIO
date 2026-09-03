@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
 function buildVideoEmbedUrl(videoId: string) {
-  return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&modestbranding=1&showinfo=0&cc_load_policy=0&cc_lang_pref=es&hl=es&iv_load_policy=3`;
+  return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=0&controls=0&playsinline=1&rel=0&modestbranding=1&showinfo=0&cc_load_policy=0&cc_lang_pref=es&hl=es&iv_load_policy=3`;
 }
 
 function getSongSignature(song: any) {
