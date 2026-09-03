@@ -4,8 +4,6 @@ import { supabase } from '@/lib/supabase';
 
 type Suggestion = { text: string; thumb?: string; cover?: string; videoId?: string };
 
-const stickers = ['🎉', '🔥', '❤️', '🥳', '🎶', '👏', '💃', '🕺', '🎂', '✨', '🙌', '💯'];
-
 export default function Page() {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -210,20 +208,6 @@ export default function Page() {
               placeholder="Tu mensaje / Saludo para el público 🗣️"
               className="w-full p-4 rounded-xl text-white placeholder:text-white/40 outline-none transition resize-none"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)' }} />
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              <span className="mr-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/45">Stickers</span>
-              {stickers.map(sticker => (
-                <button
-                  key={sticker}
-                  type="button"
-                  onClick={() => setMessage(current => `${current}${current ? ' ' : ''}${sticker}`)}
-                  aria-label={`Agregar sticker ${sticker}`}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-lg transition hover:scale-110 hover:border-cyan-300/60 hover:bg-cyan-400/10"
-                >
-                  {sticker}
-                </button>
-              ))}
-            </div>
           </div>
 
           <button type="submit" disabled={status === 'sending'}
