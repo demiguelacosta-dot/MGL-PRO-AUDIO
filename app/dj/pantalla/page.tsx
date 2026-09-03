@@ -333,6 +333,16 @@ export default function PantallaVivo() {
                   </div>
                 ))}
               </div>
+
+              <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center">
+                <img
+                  src="/qr-pedir-mgl.svg"
+                  alt="QR para pedir canciones"
+                  className="mx-auto h-40 w-40 rounded-xl bg-white p-2"
+                />
+                <p className="mt-3 text-xs font-black uppercase tracking-[0.18em] text-white">Pide tu canción</p>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-white/55">Escanea el código QR</p>
+              </div>
             </aside>
           </div>
         ) : (
