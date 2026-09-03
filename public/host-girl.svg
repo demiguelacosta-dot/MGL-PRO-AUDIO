@@ -1,0 +1,54 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="40" x2="480" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE8F5"/>
+      <stop offset="0.45" stop-color="#F7B0D6"/>
+      <stop offset="1" stop-color="#B58BF5"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="150" y1="90" x2="420" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF7EB6"/>
+      <stop offset="0.5" stop-color="#F164A9"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="dress" x1="170" y1="350" x2="430" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#2E1065"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="300" cy="300" r="270" fill="url(#bg)"/>
+
+  <path d="M156 232C156 140 219 82 300 82C381 82 444 140 444 232V256C444 305 356 326 300 326C244 326 156 305 156 256V232Z" fill="url(#hair)"/>
+
+  <path d="M170 235C170 141 227 102 300 102C373 102 430 141 430 235V265C430 331 378 374 300 374C222 374 170 331 170 265V235Z" fill="#FFDDEB"/>
+  <path d="M214 198C214 162 245 132 278 132H322C355 132 386 162 386 198V210C386 244 359 274 322 274H278C245 274 214 244 214 210V198Z" fill="url(#hair)"/>
+  <path d="M207 214C218 151 257 112 300 112C343 112 382 151 393 214C370 181 340 165 300 165C260 165 230 181 207 214Z" fill="url(#hair)"/>
+
+  <ellipse cx="226" cy="245" rx="36" ry="41" fill="#fff"/>
+  <ellipse cx="374" cy="245" rx="36" ry="41" fill="#fff"/>
+  <circle cx="228" cy="245" r="15" fill="#1F2937"/>
+  <circle cx="372" cy="245" r="15" fill="#1F2937"/>
+  <circle cx="222" cy="238" r="4" fill="#fff"/>
+  <circle cx="366" cy="238" r="4" fill="#fff"/>
+
+  <path d="M262 287C272 300 286 307 300 307C314 307 328 300 338 287" stroke="#C2410C" stroke-width="8" stroke-linecap="round"/>
+  <path d="M276 300C290 316 310 316 324 300" stroke="#FF7AA9" stroke-width="7" stroke-linecap="round"/>
+
+  <path d="M248 355C252 341 268 332 282 332H318C332 332 348 341 352 355L362 405C366 426 350 446 329 446H271C250 446 234 426 238 405L248 355Z" fill="#FEE2F3"/>
+
+  <path d="M170 428C204 392 240 382 300 382C360 382 396 392 430 428V526H170V428Z" fill="url(#dress)"/>
+  <path d="M250 382L220 520H270L291 382H250Z" fill="#FDF4FF" fill-opacity="0.9"/>
+  <path d="M350 382L380 520H330L309 382H350Z" fill="#FDF4FF" fill-opacity="0.9"/>
+
+  <path d="M185 430L145 470L170 510L221 470L185 430Z" fill="#F4C6D8"/>
+  <path d="M415 430L455 470L430 510L379 470L415 430Z" fill="#F4C6D8"/>
+
+  <path d="M180 202C180 160 220 124 300 124C380 124 420 160 420 202V214C420 180 394 155 350 136C336 131 321 128 300 128C279 128 264 131 250 136C206 155 180 180 180 214V202Z" fill="url(#hair)"/>
+
+  <path d="M255 420C244 440 235 462 233 474C230 489 240 498 255 498H345C360 498 370 489 367 474C365 462 356 440 345 420H255Z" fill="#F8D4E8"/>
+
+  <path d="M252 230L223 196L201 227L235 245L252 230Z" fill="#f7a4d3"/>
+  <path d="M348 230L377 196L399 227L365 245L348 230Z" fill="#f7a4d3"/>
+
+  <circle cx="300" cy="300" r="260" stroke="rgba(255,255,255,0.5)" stroke-width="8"/>
+</svg>
